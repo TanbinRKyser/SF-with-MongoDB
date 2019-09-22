@@ -1,0 +1,167 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe Home</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+</head>
+
+<body>
+    <!--/*@thymesVar id="recipe" type="com.tuskar.sfgrecipe2.domain.Recipe"*/-->
+    <div class="container-fluid" style="margin-top: 20px;">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+<!--                <div class="card-columns">-->
+                    <div class="card" style="margin-bottom: 10px;">
+                        <div class="card-header bg-success">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h1 class="card-title" th:text="${recipe.description}">Recipe Description Here.</h1>
+                                </div>
+                                <div class="col-md-3" style="margin-top: 10px">
+                                    <a class="btn btn-dark" href="#"
+                                       th:href="@{'/recipe/' + ${recipe.id} + '/image'}" role="button">Change Image</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body" style="margin-bottom: 10px;">
+                            <div class="row" style="padding-bottom: 10px;">
+                                <div class="col-md-3">
+                                    <h5>Categories:</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <ul th:each="category:${recipe.categories}">
+                                        <li th:text="${category.description}">category 1</li>
+                                        <li th:remove="all">category 2</li>
+                                        <li th:remove="all">category 3</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="../../static/images/guacamole.jpg" th:src="@{'/recipe/' + ${recipe.id} + '/recipeimage'}"
+                                         width="300" height="200">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>Prep Time:</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <p th:text="${recipe.prepTime} + ' min'">30min</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <h5>Difficulty:</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <p th:text="${recipe.difficulty}">Easy</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>Cooktime:</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <p th:text="${recipe.cookTime} + ' min'">30min</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <h5>Servings:</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <p th:text="${recipe.servings}">4</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>Source:</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <p th:text="${recipe.source}">30 min</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <h5>URL:</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <p><a href="#" th:href="@{recipe.url}">View Original</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-bottom: 10px;">
+                        <div class="card-header bg-secondary">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <h1 class="card-title">Ingredients</h1>
+                                </div>
+                                <div class="col-md-1" style="padding-top: 10px">
+                                    <a class="btn btn-primary" href="#"  th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}" role="button">View</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul th:each="ingredient:${recipe.ingredients}">
+                                        <li th:text="${ingredient.amount+' '+ingredient.uom.description+' - '+ingredient.description}">1 cup of milk</li>
+                                        <li th:remove="all">1 Teaspoon of chocolate</li>
+                                        <li th:remove="all">1 Teaspoon of Sugar</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-bottom: 10px;">
+                        <div class="card-header bg-info">
+                            <h1 class="card-title">Directions</h1>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p th:text="${recipe.directions}">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                        Dolor sed viverra ipsum nunc aliquet bibendum enim. In massa tempor nec feugiat. Nunc aliquet bibendum enim facilisis gravida.
+                                        Nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper. Amet luctus venenatis lectus magna fringilla.
+                                        Volutpat maecenas volutpat blandit aliquam etiam erat velit scelerisque in. Egestas egestas fringilla phasellus faucibus scelerisque eleifend.
+                                        Sagittis orci a scelerisque purus semper eget duis. Nulla pharetra diam sit amet nisl suscipit.
+                                        Sed adipiscing diam donec adipiscing tristique risus nec feugiat in. Fusce ut placerat orci nulla.
+                                        Pharetra vel turpis nunc eget lorem dolor. Tristique senectus et netus et malesuada.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-bottom: 10px;">
+                            <div class="card-header bg-warning">
+                                <h1 class="card-title">Notes</h1>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p th:text="${recipe.notes.recipeNotes}">Etiam tempor orci eu lobortis elementum nibh tellus molestie. Neque egestas congue quisque egestas.
+                                            Egestas integer eget aliquet nibh praesent tristique. Vulputate mi sit amet mauris. Sodales neque sodales ut etiam sit.
+                                            Dignissim suspendisse in est ante in. Volutpat commodo sed egestas egestas. Felis donec et odio pellentesque diam.
+                                            Pharetra vel turpis nunc eget lorem dolor sed viverra. Porta nibh venenatis cras sed felis eget.
+                                            Aliquam ultrices sagittis orci a. Dignissim diam quis enim lobortis. Aliquet porttitor lacus luctus accumsan.
+                                            Dignissim convallis aenean et tortor at risus viverra adipiscing at.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"
+            th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"
+            th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+</body>
+</html>
